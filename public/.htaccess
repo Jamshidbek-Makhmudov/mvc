@@ -1,0 +1,31 @@
+Options -MultiViews
+RewriteEngine On
+Options -Indexes
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteCond %{REQUEST_URI} !(.xls$)
+RewriteCond %{REQUEST_URI} !(.ico$)
+
+# phpinfo.php라는 파일만은 RewriteRule를 재설정을 하지 않고 그대로 phpinfo.php라고 보여주고 싶으면 아래와 같이 설정한다.
+# RewriteCond %{REQUEST_URI} !(phpinfo.php$)
+
+RewriteRule ^(.*)$ index.php?param=$1 [QSA,L]
+
+#요청한 파일 및 디렉터리가 존재하지 않을 경우 별도의 404 페이지를 실행하고 rewrite 처리를 종료
+#RewriteRule .? /404.php [L]
+
+#Options -MultiViews
+#RewriteEngine On
+#Options -Indexes
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-l
+#RewriteCond %{REQUEST_URI} !(.js$)
+#RewriteCond %{REQUEST_URI} !(.css$)
+#RewriteCond %{REQUEST_URI} !(.ico$)
+#RewriteRule ^(.*)$ Index.php?htaccess=$1 [QSA,L]
+
+
